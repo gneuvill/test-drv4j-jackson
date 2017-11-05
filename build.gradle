@@ -1,0 +1,38 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+group 'fr.gn'
+version '1.0-SNAPSHOT'
+
+apply plugin: "net.ltgt.apt"
+apply plugin: "java"
+apply plugin: "idea"
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+import org.gradle.internal.jvm.Jvm
+
+dependencies {
+    compileOnly "org.derive4j:derive4j-annotation:0.12.3-SNAPSHOT"
+    compileOnly files("/usr/local/src/derive4j-jackson/build/libs/derive4j-jackson-0.1-SNAPSHOT.jar")
+
+    apt "org.derive4j.hkt:hkt:0.9.3-SNAPSHOT"
+    apt "org.derive4j:derive4j:0.12.3-SNAPSHOT"
+    apt "org.derive4j:derive4j-fj:0.1"
+    apt files("/usr/local/src/derive4j-jackson/build/libs/derive4j-jackson-0.1-SNAPSHOT.jar")
+
+    compile "com.fasterxml.jackson.core:jackson-databind:2.8.9"
+    compile files("/usr/local/src/functionaljava/core/build/libs/functionaljava_1.8-4.8-SNAPSHOT.jar")
+    compile "org.derive4j.hkt:hkt:0.9.3-SNAPSHOT"
+    compile files(Jvm.current().toolsJar)
+}
