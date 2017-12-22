@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.fasterxml.jackson.databind.type.ReferenceType;
+import fj.Show;
 import fj.data.List;
 import fr.gn.testdr4j.Person.Address;
 import fr.gn.testdr4j.Person.Full;
@@ -24,7 +25,9 @@ public final class Main {
     final Person<Simple> tata = Persons.SimplePers("Tata", 23);
     final Address adress = Addresses.Adress("rue Titi", "TitiVille");
     final Person<Full> tutu = Persons.FullPers("Tutu", 18, adress, List.nil());
-    final Person<Full> toto = Persons.FullPers("Toto", 37, adress, List.list(tata, tutu));
+    final Person<Full> toto = Persons.FullPers("Toto", 37, adress
+        , List.list(tata, tutu));
+        //, List.single(Things.Thing("toto")));
 
     final String strAddress = mapper.writeValueAsString(adress);
     System.out.println(strAddress);
